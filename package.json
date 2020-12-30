@@ -1,0 +1,34 @@
+{
+  "name": "create-fullstack-app",
+  "version": "0.0.1",
+  "description": "A CLI that creates a fullstack boilerplate application.",
+  "main": "src/index.js",
+  "bin": {
+    "create-full-stack-app-js": "bin/create-fullstack-app-js"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShubhankarKG/create-fullstack-app-js.git"
+  },
+  "keywords": [
+    "fullstack",
+    "templates",
+    "nodejs"
+  ],
+  "author": "ShubhankarKG",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ShubhankarKG/create-fullstack-app-js/issues"
+  },
+  "homepage": "https://github.com/ShubhankarKG/create-fullstack-app-js#readme",
+  "dependencies": {
+    "arg": "^5.0.0",
+    "inquirer": "^7.3.3"
+  }
+}
