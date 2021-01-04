@@ -25,7 +25,7 @@ function parseArgumentsIntoOptions(rawArgs: string[]): IOptions {
 
 async function promptForMissingOptions(options: IOptions): Promise<IOptions> {
   const defaultAPIType = "rest";
-  const defaultDatabase = "MongoDB";
+  const defaultDatabase = "mongodb";
 
   if (options.skipPrompts) {
     return { ...options, apiType: defaultAPIType, database: defaultDatabase };
@@ -47,7 +47,7 @@ async function promptForMissingOptions(options: IOptions): Promise<IOptions> {
       type: "list",
       name: "database",
       message: "Please choose which project API pattern to use? ",
-      choices: ["MongoDB", "PostgreSQL"],
+      choices: ["MongoDB", "Firebase", "PostgreSQL", "MySQL"],
       default: defaultDatabase,
     });
   }

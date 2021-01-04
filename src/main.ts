@@ -40,18 +40,9 @@ export async function createProject(options: IOptions): Promise<boolean> {
   let templateDir = path.resolve(__dirname, "../templates");
 
   const apiType = options.apiType?.toLowerCase();
-  const databaseType = options.database;
-  if (apiType === "rest") {
-    templateDir = path.join(templateDir, "rest");
-  } else if (apiType === "graphql") {
-    templateDir = path.join(templateDir, "graphql");
-  }
-
-  if (databaseType == "MongoDB") {
-    templateDir = path.join(templateDir, "server", "oodbms");
-  } else {
-    templateDir = path.join(templateDir, "rdbms");
-  }
+  const databaseType = options.database?.toLowerCase();
+  
+  templateDir = path.join(templateDir, apiType!, "server",  databaseType!);
   console.log(templateDir);
   options.templateDirectory = templateDir;
 
