@@ -1,9 +1,14 @@
 import arg from "arg";
 import inquirer from "inquirer";
-import { IOptions } from "./constants";
+import { DefaultOptions, ICliOptions } from "./constants";
 import { createProject } from "./main";
 
-function parseArgumentsIntoOptions(rawArgs: string[]): IOptions {
+/**
+ * Parse Command Line Arguments into options
+ * @param rawArgs {Array<string>} The command-line arguments
+ * @returns {ICliOptions} The command line arguments parsed into ICliOptions interface
+ */
+function parseArgumentsIntoOptions(rawArgs: string[]): ICliOptions {
   const args = arg(
     {
       "--git": Boolean,
@@ -23,12 +28,16 @@ function parseArgumentsIntoOptions(rawArgs: string[]): IOptions {
   };
 }
 
-async function promptForMissingOptions(options: IOptions): Promise<IOptions> {
-  const defaultAPIType = "rest";
-  const defaultDatabase = "mongodb";
+/**
+ * 
+ * @param options {ICliOptions} The Command Line arguments parsed into ICliOptions
+ * @returns {Promise<ICliOptions>} refined, and all fields filled into ICliOptions
+ */
+async function promptForMissingOptions(options: ICliOptions): Promise<ICliOptions> {
+  const { apiType, database, client } = DefaultOptions;
 
   if (options.skipPrompts) {
-    return { ...options, apiType: defaultAPIType, database: defaultDatabase };
+    return { ...options, apiType, database, client };
   }
 
   const questions: Array<inquirer.QuestionCollection<any>> = [];
@@ -38,7 +47,7 @@ async function promptForMissingOptions(options: IOptions): Promise<IOptions> {
       name: "apiType",
       message: "Please choose which project API pattern to use? ",
       choices: ["rest", "graphql"],
-      default: defaultAPIType,
+      default: apiType,
     });
   }
 
@@ -46,9 +55,19 @@ async function promptForMissingOptions(options: IOptions): Promise<IOptions> {
     questions.push({
       type: "list",
       name: "database",
-      message: "Please choose which project API pattern to use? ",
+      message: "Please choose which database to use? ",
       choices: ["MongoDB", "Firebase", "PostgreSQL", "MySQL"],
-      default: defaultDatabase,
+      default: database,
+    });
+  }
+
+  if (!options.client) {
+    questions.push({
+      type: "list",
+      name: "client",
+      message: "Please choose which client to configure? ",
+      choices: ["React", "Angular", "Vue"],
+      default: client,
     });
   }
 
@@ -67,9 +86,14 @@ async function promptForMissingOptions(options: IOptions): Promise<IOptions> {
     git: options.git || answers.git,
     apiType: answers.apiType,
     database: answers.database,
+    client: answers.client
   };
 }
 
+/**
+ * The CLI Function
+ * @param args The Command Line Arguments
+ */
 export async function cli(args: string[]) {
   let options = parseArgumentsIntoOptions(args);
   options = await promptForMissingOptions(options);
