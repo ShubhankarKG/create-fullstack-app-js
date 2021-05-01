@@ -5,16 +5,14 @@
   "main": "src/index.js",
   "bin": {
     "create-full-stack-app-js": "bin/create-fullstack-app-js",
-    "@ShubhankarKG/create-full-stack-app-js": "bin/create-fullstack-app-js"
+    "@shubhankar_kg/create-full-stack-app-js": "bin/create-fullstack-app-js"
   },
   "publishConfig": {
     "access": "public"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prestart": "tsc",
-    "start": "node dist/cli",
-    "serve": "nodemon --exec tsc && node/dist/cli"
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -24,6 +22,11 @@
     "fullstack",
     "templates",
     "nodejs"
+  ],
+  "files": [
+    "bin",
+    "dist",
+    "templates"
   ],
   "author": "ShubhankarKG",
   "license": "MIT",
