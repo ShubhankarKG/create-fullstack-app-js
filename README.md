@@ -10,7 +10,7 @@
     <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" />
   </a>
   <a href="https://github.com/ShubhankarKG/create-fullstack-app-js/blob/master/LICENSE" target="_blank">
-    <img alt="License: MIT" src="https://img.shields.io/github/license/ShubhankarKG/create-fullstack-app" />
+    <img alt="License: MIT" src="https://img.shields.io/github/license/ShubhankarKG/create-fullstack-app-js" />
   </a>
   <a href="https://twitter.com/ShubhankarKG" target="_blank">
     <img alt="Twitter: ShubhankarKG" src="https://img.shields.io/twitter/follow/ShubhankarKG.svg?style=social" />

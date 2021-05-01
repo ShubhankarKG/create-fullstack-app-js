@@ -2,7 +2,6 @@
   "name": "create-fullstack-app",
   "version": "0.0.1",
   "description": "A CLI that creates a fullstack boilerplate application.",
-  "main": "src/index.js",
   "bin": {
     "create-full-stack-app-js": "bin/create-fullstack-app-js",
     "@shubhankar_kg/create-full-stack-app-js": "bin/create-fullstack-app-js"
