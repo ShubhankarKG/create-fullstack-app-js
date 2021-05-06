@@ -93,7 +93,7 @@ module.exports = {
           user.password = passwordHash(user.password);
         }
         const updatedUser = await User.findByIdAndUpdate(id, user, {
-          new: true,
+          new: true
         });
         return res.status(201).json({ updatedUser });
       }
@@ -121,5 +121,5 @@ module.exports = {
     } catch (error) {
       return res.status(500).json({ error: "Server error : " + error.message });
     }
-  },
+  }
 };

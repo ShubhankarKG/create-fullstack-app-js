@@ -1,8 +1,8 @@
-<h1 align="center">Welcome to create-fullstack-app 👋</h1>
+<h1 align="center">Welcome to create-fullstack-app-js 👋</h1>
 <p>
-  <a href="https://www.npmjs.com/package/create-fullstack-app" target="_blank">
-    <img alt="Version" src="https://img.shields.io/npm/v/create-fullstack-app.svg">
-  </a>
+  <!-- <a href="https://www.npmjs.com/package/create-fullstack-app-js" target="_blank">
+    <img alt="Version" src="https://img.shields.io/npm/v/create-fullstack-app-js.svg">
+  </a> -->
   <a href="https://github.com/ShubhankarKG/create-fullstack-app-js#readme" target="_blank">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
@@ -24,6 +24,7 @@
 ## Install
 
 To install globally
+
 ```sh
 $ npm install -g create-fullstack-app
 ```
@@ -44,9 +45,9 @@ $ npm run test
 
 👤 **ShubhankarKG**
 
-* Twitter: [@ShubhankarKG](https://twitter.com/ShubhankarKG)
-* Github: [@ShubhankarKG](https://github.com/ShubhankarKG)
-* LinkedIn: [@shubhankar-gupta-3a7323192](https://linkedin.com/in/shubhankar-gupta-3a7323192)
+- Twitter: [@ShubhankarKG](https://twitter.com/ShubhankarKG)
+- Github: [@ShubhankarKG](https://github.com/ShubhankarKG)
+- LinkedIn: [@shubhankar-gupta-3a7323192](https://linkedin.com/in/shubhankar-gupta-3a7323192)
 
 ## 🤝 Contributing
 

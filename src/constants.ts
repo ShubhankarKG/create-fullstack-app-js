@@ -30,7 +30,7 @@ export const DefaultOptions = {
   apiType: APITypes.REST,
   database: DatabaseTypes.MongoDB,
   client: ClientTypes.React
-}
+};
 
 export interface IOptions {
   skipPrompts: boolean;

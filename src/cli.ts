@@ -15,31 +15,34 @@ function parseArgumentsIntoOptions(rawArgs: string[]): ICliOptions {
       "--yes": Boolean,
       "-g": "--git",
       "-y": "--yes",
-      "--no-client": Boolean,
+      "--no-client": Boolean
     },
     {
-      argv: rawArgs.slice(2),
+      argv: rawArgs.slice(2)
     }
   );
   return {
     skipPrompts: args["--yes"] || false,
     git: args["--git"] || false,
-    targetDirectory: args._[0] || ".",
+    targetDirectory: args._[0] || "."
   };
 }
 
 /**
- * 
+ *
  * @param options {ICliOptions} The Command Line arguments parsed into ICliOptions
  * @returns {Promise<ICliOptions>} refined, and all fields filled into ICliOptions
  */
-async function promptForMissingOptions(options: ICliOptions): Promise<ICliOptions> {
+async function promptForMissingOptions(
+  options: ICliOptions
+): Promise<ICliOptions> {
   const { apiType, database, client } = DefaultOptions;
 
   if (options.skipPrompts) {
     return { ...options, apiType, database, client };
   }
 
+  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
   const questions: Array<inquirer.QuestionCollection<any>> = [];
   if (!options.apiType) {
     questions.push({
@@ -47,7 +50,7 @@ async function promptForMissingOptions(options: ICliOptions): Promise<ICliOption
       name: "apiType",
       message: "Please choose which project API pattern to use? ",
       choices: ["rest", "graphql"],
-      default: apiType,
+      default: apiType
     });
   }
 
@@ -57,7 +60,7 @@ async function promptForMissingOptions(options: ICliOptions): Promise<ICliOption
       name: "database",
       message: "Please choose which database to use? ",
       choices: ["MongoDB", "Firebase", "PostgreSQL", "MySQL"],
-      default: database,
+      default: database
     });
   }
 
@@ -67,7 +70,7 @@ async function promptForMissingOptions(options: ICliOptions): Promise<ICliOption
       name: "client",
       message: "Please choose which client to configure? ",
       choices: ["React", "Angular", "Vue"],
-      default: client,
+      default: client
     });
   }
 
@@ -76,7 +79,7 @@ async function promptForMissingOptions(options: ICliOptions): Promise<ICliOption
       type: "confirm",
       name: "git",
       message: "Initialize a git repository?",
-      default: false,
+      default: false
     });
   }
 
@@ -94,7 +97,7 @@ async function promptForMissingOptions(options: ICliOptions): Promise<ICliOption
  * The CLI Function
  * @param args The Command Line Arguments
  */
-export async function cli(args: string[]) {
+export async function cli(args: string[]): Promise<void> {
   let options = parseArgumentsIntoOptions(args);
   options = await promptForMissingOptions(options);
   await createProject(options);

@@ -30,14 +30,13 @@ async function initializeFolder(dirPath: string) {
  * @param targetDirectory {String} the targetDirectory
  * @returns {Promise<Error | void>} if successful, returns void, else returns an Error.
  */
-async function copyTemplateFiles(templateDirectory: string, targetDirectory: string): Promise<Error | void> {
-  return copy(
-    templateDirectory,
-    targetDirectory,
-    {
-      clobber: false
-    }
-  );
+async function copyTemplateFiles(
+  templateDirectory: string,
+  targetDirectory: string
+): Promise<Error | void> {
+  return copy(templateDirectory, targetDirectory, {
+    clobber: false
+  });
 }
 
 /**
@@ -47,7 +46,7 @@ async function copyTemplateFiles(templateDirectory: string, targetDirectory: str
  */
 async function initGit(dirPath: string): Promise<Error | void> {
   const result = await execa("git", ["init"], {
-    cwd: dirPath,
+    cwd: dirPath
   });
   if (result.failed) {
     return Promise.reject(new Error("Failed to initialize git"));
@@ -55,12 +54,13 @@ async function initGit(dirPath: string): Promise<Error | void> {
   return;
 }
 
+// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 async function handleErrors(handler: () => Promise<any>, errorMessage: string) {
   try {
     await handler();
   } catch (err) {
     console.error(`%s Error: ${errorMessage}`, chalk.red.bold("ERROR"));
-    process.exit(1)
+    process.exit(1);
   }
 }
 
@@ -76,10 +76,21 @@ export async function createProject(options: ICliOptions): Promise<boolean> {
   const databaseType = options.database!.toString().toLowerCase();
   const clientType = options.client!.toString().toLowerCase();
 
-  const serverTemplateDir = path.join(templateDir, apiType, "server", databaseType);
-  const clientTemplateDir = path.join(templateDir, apiType, "client", `client-${clientType}`);
+  const serverTemplateDir = path.join(
+    templateDir,
+    apiType,
+    "server",
+    databaseType
+  );
+  const clientTemplateDir = path.join(
+    templateDir,
+    apiType,
+    "client",
+    `client-${clientType}`
+  );
 
-  const targetDirectory = path.resolve(process.cwd(), options.targetDirectory) || process.cwd();
+  const targetDirectory =
+    path.resolve(process.cwd(), options.targetDirectory) || process.cwd();
 
   try {
     await access(templateDir, fs.constants.R_OK);
@@ -91,39 +102,61 @@ export async function createProject(options: ICliOptions): Promise<boolean> {
   const tasks = new Listr([
     {
       title: "Initialize structure of project",
-      task: () => handleErrors(() => initializeFolder(targetDirectory),
-        "Failed to create project directory"
-      ),
+      task: () =>
+        handleErrors(
+          () => initializeFolder(targetDirectory),
+          "Failed to create project directory"
+        )
     },
     {
       title: "Copy server files",
-      task: () => handleErrors(() => copyTemplateFiles(serverTemplateDir, `${targetDirectory}/server`,
-      ), "Failed to Copy files"),
+      task: () =>
+        handleErrors(
+          () =>
+            copyTemplateFiles(serverTemplateDir, `${targetDirectory}/server`),
+          "Failed to Copy files"
+        )
     },
     {
       title: "Install server dependencies",
-      task: () => handleErrors(() => projectInstall({
-        cwd: serverTemplateDir,
-      }), "Failed to install server dependencies")
-
+      task: () =>
+        handleErrors(
+          () =>
+            projectInstall({
+              cwd: serverTemplateDir
+            }),
+          "Failed to install server dependencies"
+        )
     },
     {
       title: "Copy client files",
-      task: () => handleErrors(() => copyTemplateFiles(clientTemplateDir, `${targetDirectory}/client`),
-        "Failed to copy client files"
-      )
+      task: () =>
+        handleErrors(
+          () =>
+            copyTemplateFiles(clientTemplateDir, `${targetDirectory}/client`),
+          "Failed to copy client files"
+        )
     },
     {
       title: "Install client dependencies",
-      task: () => handleErrors(() => projectInstall({
-        cwd: clientTemplateDir,
-      }), "Failed to install client dependencies")
+      task: () =>
+        handleErrors(
+          () =>
+            projectInstall({
+              cwd: clientTemplateDir
+            }),
+          "Failed to install client dependencies"
+        )
     },
     {
       title: "Initialize git",
-      task: () => handleErrors(() => initGit(targetDirectory), "Failed to initialize git"),
-      enabled: () => options.git,
-    },
+      task: () =>
+        handleErrors(
+          () => initGit(targetDirectory),
+          "Failed to initialize git"
+        ),
+      enabled: () => options.git
+    }
   ]);
 
   await tasks.run();
