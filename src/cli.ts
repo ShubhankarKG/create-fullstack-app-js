@@ -8,14 +8,13 @@ import { createProject } from "./main";
  * @param rawArgs {Array<string>} The command-line arguments
  * @returns {ICliOptions} The command line arguments parsed into ICliOptions interface
  */
-function parseArgumentsIntoOptions(rawArgs: string[]): ICliOptions {
+export function parseArgumentsIntoOptions(rawArgs: string[]): ICliOptions {
   const args = arg(
     {
       "--git": Boolean,
       "--yes": Boolean,
       "-g": "--git",
-      "-y": "--yes",
-      "--no-client": Boolean
+      "-y": "--yes"
     },
     {
       argv: rawArgs.slice(2)

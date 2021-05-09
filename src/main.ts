@@ -59,7 +59,7 @@ async function handleErrors(handler: () => Promise<any>, errorMessage: string) {
   try {
     await handler();
   } catch (err) {
-    console.error(`%s Error: ${errorMessage}`, chalk.red.bold("ERROR"));
+    console.error(`%s Error: ${errorMessage}`, chalk.red.bold("X"));
     process.exit(1);
   }
 }
